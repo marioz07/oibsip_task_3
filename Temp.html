@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Temperature Conversion</title>
+  </head>
+  <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        background-color: #fff;
+        padding: 50px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #aaa;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .radio-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      label {
+        margin-right: 20px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #3e8e41;
+      }
+
+      #result {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Temperature Conversion</h2>
+    <div class="container">
+      <input type="text" id="temperatureInput" placeholder="Enter temperature">
+      <br><br>
+      <div class="radio-group">
+        <label for="celsiusOption">Celsius</label>
+        <input type="radio" id="celsiusOption" name="unit" value="celsius">
+        <label for="fahrenheitOption">Fahrenheit</label>
+        <input type="radio" id="fahrenheitOption" name="unit" value="fahrenheit">
+      </div>
+      <br>
+      <button id="convertBtn">Convert</button>
+      <br><br>
+      <p id="result">Result:</p>
+    </div>
+    <script>
+      const convertBtn = document.getElementById("convertBtn");
+      const temperatureInput = document.getElementById("temperatureInput");
+      const result = document.getElementById("result");
+
+      convertBtn.addEventListener("click", function() {
+        const temperature = temperatureInput.value;
+        const selectedUnit = document.querySelector('input[name="unit"]:checked').value;
+
+        if (!temperature) {
+          result.innerHTML = "Please enter a temperature.";
+        } else if (isNaN(temperature)) {
+          result.innerHTML = "Please enter a valid number.";
+        } else {
+          if (selectedUnit === "celsius") {
+            const fahrenheit = (temperature * 9/5) + 32;
+            result.innerHTML = `Result: ${fahrenheit}°F`;
+          } else if (selectedUnit === "fahrenheit") {
+            const celsius = (temperature - 32) * 5/9;
+            result.innerHTML = `Result: ${celsius}°C`;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
